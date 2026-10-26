@@ -1,108 +1,447 @@
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maya Paul Boutique | Luxury Fashion</title>
-  <link rel="stylesheet" href="assets/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#11100e">
+<meta name="description" content="Discover timeless fashion and statement pieces at Maya Paul Boutique.">
+<title>Maya Paul Boutique | Luxury Fashion</title>
+
+<style>
+:root {
+  --black: #11100e;
+  --cream: #f7f3eb;
+  --gold: #c5a46d;
+  --muted: #aaa49a;
+  --white: #fffdf8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--black);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+button, a { -webkit-tap-highlight-color: transparent; }
+img { width: 100%; display: block; object-fit: cover; }
+.announcement {
+  background: var(--gold);
+  color: #17130d;
+  text-align: center;
+  padding: 9px 12px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+header {
+  background: var(--black);
+  color: var(--white);
+  padding: 20px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid #37332c;
+}
+.logo { font-family: Georgia, serif; font-size: 25px; letter-spacing: 1px; }
+.logo span { color: var(--gold); }
+nav { display: flex; gap: 25px; align-items: center; }
+nav a { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; }
+nav a:hover { color: var(--gold); }
+.nav-contact {
+  border: 1px solid var(--gold);
+  padding: 10px 15px;
+}
+.hero {
+  min-height: 570px;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(12,11,10,.94) 0%, rgba(12,11,10,.72) 48%, rgba(12,11,10,.16) 100%),
+    url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=2000&q=85") center 40% / cover no-repeat;
+  color: white;
+  padding: 80px 8%;
+}
+.hero-content { max-width: 600px; }
+.eyebrow {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.hero h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(43px, 7vw, 82px);
+  font-weight: normal;
+  line-height: 1.04;
+  margin: 22px 0;
+}
+.hero h1 em { color: var(--gold); font-weight: normal; }
+.hero p { color: #e0dbd2; max-width: 440px; font-size: 15px; }
+.buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+.btn {
+  display: inline-block;
+  padding: 14px 22px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+  border: 1px solid var(--gold);
+  transition: .2s;
+}
+.btn-gold { background: var(--gold); color: #17130d; }
+.btn-outline { color: white; }
+.btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.section { padding: 75px 7%; }
+.section-dark { background: var(--black); color: var(--white); }
+.section-heading { text-align: center; margin-bottom: 35px; }
+.section-heading .eyebrow { display: block; margin-bottom: 10px; }
+.section-heading h2 {
+  font-family: Georgia, serif;
+  font-size: clamp(30px, 4vw, 47px);
+  font-weight: normal;
+}
+.section-heading p { color: #81796d; margin-top: 10px; font-size: 14px; }
+.section-dark .section-heading p { color: var(--muted); }
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+}
+.category {
+  min-height: 230px;
+  position: relative;
+  overflow: hidden;
+  background: #25211c;
+}
+.category img { height: 100%; min-height: 230px; position: absolute; inset: 0; transition: transform .5s; }
+.category:hover img { transform: scale(1.06); }
+.category::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,.82), transparent 75%);
+}
+.category h3 {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  z-index: 1;
+  color: white;
+  font-family: Georgia, serif;
+  font-size: 24px;
+  font-weight: normal;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+.product-card { min-width: 0; }
+.product-image { position: relative; background: #e8e0d4; overflow: hidden; }
+.product-image img { height: 300px; transition: transform .4s; }
+.product-card:hover .product-image img { transform: scale(1.04); }
+.tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--cream);
+  padding: 5px 9px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.product-info { padding: 15px 2px; }
+.product-info h3 { font-family: Georgia, serif; font-size: 20px; font-weight: normal; }
+.product-info p { color: #766e62; font-size: 12px; margin: 3px 0 10px; }
+.price { font-weight: bold; font-size: 14px; margin-bottom: 12px; }
+.product-info .btn { display: block; text-align: center; color: var(--black); }
+.story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 55px;
+}
+.story img { height: 430px; }
+.story h2 {
+  font-family: Georgia, serif;
+  font-size: clamp(34px, 4vw, 53px);
+  font-weight: normal;
+  line-height: 1.15;
+  margin: 17px 0;
+}
+.story p { color: #70695e; font-size: 14px; margin-bottom: 15px; }
+.story .btn { margin-top: 8px; }
+.promise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; text-align: center; }
+.promise { border: 1px solid #39342b; padding: 28px 18px; }
+.promise .symbol { color: var(--gold); font-size: 27px; }
+.promise h3 { font-family: Georgia, serif; font-weight: normal; font-size: 21px; margin: 10px 0 5px; }
+.promise p { color: var(--muted); font-size: 12px; }
+.contact {
+  background: #e9e0d2;
+  text-align: center;
+  padding: 70px 7%;
+}
+.contact h2 { font: normal clamp(32px, 5vw, 50px) Georgia, serif; margin: 12px 0; }
+.contact p { color: #6c6255; margin: 0 auto 23px; max-width: 540px; font-size: 14px; }
+footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 35px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+footer p { color: var(--muted); font-size: 11px; }
+footer .logo { font-size: 22px; }
+.whatsapp {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 20;
+  background: #1eaa61;
+  color: white;
+  border-radius: 40px;
+  padding: 13px 18px;
+  font-weight: bold;
+  font-size: 12px;
+  box-shadow: 0 5px 20px #0003;
+}
+@media (max-width: 900px) {
+  .categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .product-image img { height: 280px; }
+  .story { gap: 28px; }
+}
+@media (max-width: 620px) {
+  header { padding: 15px 5%; flex-wrap: wrap; }
+  .logo { font-size: 22px; }
+  nav { width: 100%; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  nav a { font-size: 9px; letter-spacing: .8px; }
+  .nav-contact { padding: 7px 9px; }
+  .hero { min-height: 530px; padding: 65px 7%; background-position: 58% center; }
+  .hero h1 { font-size: 49px; }
+  .section { padding: 55px 5%; }
+  .categories { gap: 10px; }
+  .category, .category img { min-height: 180px; }
+  .category h3 { left: 12px; bottom: 12px; font-size: 20px; }
+  .product-grid { gap: 16px 11px; }
+  .product-image img { height: 215px; }
+  .product-info h3 { font-size: 17px; }
+  .product-info .btn { padding: 12px 7px; font-size: 9px; }
+  .story { grid-template-columns: 1fr; gap: 25px; }
+  .story img { height: 300px; }
+  .promise-grid { grid-template-columns: 1fr; }
+  footer { text-align: center; justify-content: center; }
+  .whatsapp { right: 12px; bottom: 12px; }
+}
+</style>
 </head>
+
 <body>
-  <div class="announcement">LUXURY FASHION • LAGOS, NIGERIA</div>
+<div class="announcement">A LITTLE LUXURY, EVERY DAY · FASHION WITH PRESENCE</div>
 
-  <header class="header">
-    <a class="logo" href="#">MP <span>MAYA PAUL<br><small>B O U T I Q U E</small></span></a>
-    <nav>
-      <a href="#collections">Collections</a>
-      <a href="#shop">Shop</a>
-      <a href="#story">Our Story</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<header>
+  <a class="logo" href="#home">MAYA PAUL <span>BOUTIQUE</span></a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#collections">Collections</a>
+    <a href="#shop">Shop</a>
+    <a href="#about">Our Story</a>
+    <a class="nav-contact" href="#contact">Contact</a>
+  </nav>
+</header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">THE ART OF EVERYDAY ELEGANCE</p>
-        <h1>Quiet luxury.<br><em>Unmistakable</em> presence.</h1>
-        <p>Discover considered fashion, elegant essentials and statement pieces for every occasion.</p>
-        <a class="gold-button" href="#shop">EXPLORE COLLECTION ↗</a>
+<main>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="eyebrow">The art of dressing well</div>
+    <h1>Style is how you <em>arrive.</em></h1>
+    <p>Discover timeless pieces, refined details and statement looks curated for the woman who dresses with confidence.</p>
+    <div class="buttons">
+      <a class="btn btn-gold" href="#shop">Explore Collection</a>
+      <a class="btn btn-outline" href="#about">Discover Our Story</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="collections">
+  <div class="section-heading">
+    <span class="eyebrow">Curated for you</span>
+    <h2>Explore Our Collections</h2>
+    <p>A wardrobe that speaks before you do.</p>
+  </div>
+  <div class="categories">
+    <a class="category" href="#shop">
+      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80" alt="Women's fashion collection" loading="lazy">
+      <h3>Ready to Wear</h3>
+    </a>
+    <a class="category" href="#shop">
+      <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=700&q=80" alt="Elegant clothing" loading="lazy">
+      <h3>Elegant Looks</h3>
+    </a>
+    <a class="category" href="#shop">
+      <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=700&q=80" alt="Fashion shoes" loading="lazy">
+      <h3>Shoes</h3>
+    </a>
+    <a class="category" href="#shop">
+      <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=700&q=80" alt="Jewellery and accessories" loading="lazy">
+      <h3>Accessories</h3>
+    </a>
+  </div>
+</section>
+
+<section class="section section-dark" id="shop">
+  <div class="section-heading">
+    <span class="eyebrow">The boutique edit</span>
+    <h2>Featured Pieces</h2>
+    <p>Sample products for this independent website concept.</p>
+  </div>
+  <div class="product-grid">
+    <article class="product-card">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=700&q=80" alt="Elegant neutral outfit" loading="lazy">
+        <span class="tag">Featured</span>
       </div>
-      <div class="hero-photo">
-        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=85" alt="Fashion editorial">
-        <div class="photo-label">THE NEW EDIT · 01</div>
+      <div class="product-info">
+        <h3>The Everyday Edit</h3>
+        <p>Effortless everyday style</p>
+        <div class="price">₦25,000</div>
+        <a class="btn" href="#" onclick="orderProduct('The Everyday Edit'); return false;">Enquire on WhatsApp</a>
       </div>
-      <div class="hero-footer">TIMELESS STYLE &nbsp; ✦ &nbsp; CURATED WITH INTENTION</div>
-    </section>
-
-    <section class="collections" id="collections">
-      <p class="eyebrow">EXPLORE OUR WORLD</p>
-      <h2>Find your <em>signature.</em></h2>
-      <div class="collection-grid">
-        <a href="#shop" class="collection c1"><span>01 / APPAREL</span><h3>Modern<br>muse.</h3><b>EXPLORE ↗</b></a>
-        <a href="#shop" class="collection c2"><span>02 / OCCASION</span><h3>Made for<br>the moment.</h3><b>EXPLORE ↗</b></a>
-        <a href="#shop" class="collection c3"><span>03 / DETAILS</span><h3>The finishing<br>touch.</h3><b>EXPLORE ↗</b></a>
+    </article>
+    <article class="product-card">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=700&q=80" alt="Statement fashion outfit" loading="lazy">
+        <span class="tag">Statement</span>
       </div>
-    </section>
-
-    <section class="shop" id="shop">
-      <p class="eyebrow">THE BOUTIQUE EDIT</p>
-      <h2>Pieces to <em>keep close.</em></h2>
-      <p class="section-note">Sample products and prices for demonstration only.</p>
-      <div class="products">
-        <article class="product">
-          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=85" alt="Fashion collection">
-          <p>APPAREL</p><h3>The Sculpted Set</h3><strong>₦38,000</strong>
-          <button onclick="enquire('The Sculpted Set','₦38,000')">ENQUIRE ↗</button>
-        </article>
-        <article class="product">
-          <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=85" alt="Occasion fashion">
-          <p>OCCASION</p><h3>The Evening Muse</h3><strong>₦52,000</strong>
-          <button onclick="enquire('The Evening Muse','₦52,000')">ENQUIRE ↗</button>
-        </article>
-        <article class="product">
-          <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=700&q=85" alt="Fashion essentials">
-          <p>ESSENTIALS</p><h3>The Everyday Classic</h3><strong>₦24,500</strong>
-          <button onclick="enquire('The Everyday Classic','₦24,500')">ENQUIRE ↗</button>
-        </article>
+      <div class="product-info">
+        <h3>The Statement Look</h3>
+        <p>Made to stand out</p>
+        <div class="price">₦38,000</div>
+        <a class="btn" href="#" onclick="orderProduct('The Statement Look'); return false;">Enquire on WhatsApp</a>
       </div>
-      <p class="disclaimer">Concept website only. Product images, names and prices are placeholders, not confirmed boutique inventory.</p>
-    </section>
-
-    <section class="story" id="story">
-      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1000&q=85" alt="Fashion styling">
-      <div><p class="eyebrow">A DIFFERENT KIND OF DRESSING</p>
-        <h2>Style that feels<br><em>like you.</em></h2>
-        <p>Good style is personal. It is in the details, the pieces you reach for again and the confidence that comes from feeling like yourself.</p>
-        <a class="dark-button" href="#contact">GET IN TOUCH ↗</a>
+    </article>
+    <article class="product-card">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=700&q=80" alt="Stylish women's shoes" loading="lazy">
+        <span class="tag">Style pick</span>
       </div>
-    </section>
+      <div class="product-info">
+        <h3>Classic Steps</h3>
+        <p>A finishing touch</p>
+        <div class="price">₦32,000</div>
+        <a class="btn" href="#" onclick="orderProduct('Classic Steps'); return false;">Enquire on WhatsApp</a>
+      </div>
+    </article>
+    <article class="product-card">
+      <div class="product-image">
+        <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=700&q=80" alt="Elegant accessories" loading="lazy">
+        <span class="tag">Finishing touch</span>
+      </div>
+      <div class="product-info">
+        <h3>The Accessory Edit</h3>
+        <p>Details make the difference</p>
+        <div class="price">₦15,000</div>
+        <a class="btn" href="#" onclick="orderProduct('The Accessory Edit'); return false;">Enquire on WhatsApp</a>
+      </div>
+    </article>
+  </div>
+</section>
 
-    <section class="contact" id="contact">
-      <p class="eyebrow">LET'S CONNECT</p>
-      <h2>Your next favourite<br><em>starts here.</em></h2>
-      <p>Want to enquire about a product? Get in touch for availability and details.</p>
-      <button class="gold-button" onclick="enquire('the collection','')">SEND AN ENQUIRY ↗</button>
-    </section>
-  </main>
+<section class="section" id="about">
+  <div class="story">
+    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1100&q=85" alt="Boutique fashion shopping experience" loading="lazy">
+    <div>
+      <span class="eyebrow">More than fashion</span>
+      <h2>Find your look. Own your moment.</h2>
+      <p>Great style is personal. It is in the details, the confidence and the way you feel when everything comes together.</p>
+      <p>Maya Paul Boutique is presented here as a luxury-style website concept, designed to give customers a smooth way to explore collections and enquire about products.</p>
+      <a class="btn btn-gold" href="#contact">Get in Touch</a>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    <div class="footer-logo">MP · MAYA PAUL BOUTIQUE</div>
-    <p>Luxury fashion concept · Lagos, Nigeria</p>
-    <small>Independent concept demo. Not the official website of Maya Paul Boutique.</small>
-  </footer>
+<section class="section section-dark">
+  <div class="section-heading">
+    <span class="eyebrow">The boutique experience</span>
+    <h2>Made to Feel Special</h2>
+    <p>Thoughtful service from discovery to enquiry.</p>
+  </div>
+  <div class="promise-grid">
+    <div class="promise">
+      <div class="symbol">✦</div>
+      <h3>Curated Style</h3>
+      <p>Pieces selected to help you express your individual style.</p>
+    </div>
+    <div class="promise">
+      <div class="symbol">◇</div>
+      <h3>Personal Enquiries</h3>
+      <p>Ask questions about sizing, availability and product details.</p>
+    </div>
+    <div class="promise">
+      <div class="symbol">♡</div>
+      <h3>Customer Care</h3>
+      <p>A simple way to connect with the boutique before ordering.</p>
+    </div>
+  </div>
+</section>
 
-  <script>
-    // Add the owner's approved WhatsApp number before enabling customer enquiries.
-    const WHATSAPP_NUMBER = "";
-    function enquire(product, price) {
-      if (!WHATSAPP_NUMBER) {
-        alert("Demo mode: the boutique's approved WhatsApp number has not been added yet.");
-        return;
-      }
-      const message = `Hello, I would like to enquire about ${product} ${price}. Please confirm availability and current price.`;
-      window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message), "_blank");
-    }
-  </script>
+<section class="contact" id="contact">
+  <span class="eyebrow">Your next favourite look</span>
+  <h2>Let's Find Your Style.</h2>
+  <p>Have a question about a piece or want to enquire about a collection? Get in touch to continue the conversation.</p>
+  <a class="btn btn-gold" href="#" onclick="contactBoutique(); return false;">Contact the Boutique</a>
+  <p style="font-size:11px;margin-top:18px;">Independent website concept · Product prices and details are illustrative placeholders.</p>
+</section>
+</main>
+
+<footer>
+  <a class="logo" href="#home">MAYA PAUL <span>BOUTIQUE</span></a>
+  <p>© <span id="year"></span> Maya Paul Boutique concept. All rights reserved.</p>
+  <p>Independent design concept — not an official store website.</p>
+</footer>
+
+<a class="whatsapp" href="#" onclick="contactBoutique(); return false;">WhatsApp Us ↗</a>
+
+<script>
+/*
+  DEMO SETUP:
+  Replace 2348000000000 below with the boutique's real WhatsApp number.
+  Use international format with country code, digits only.
+  Example for a Nigerian number: 2348012345678
+*/
+const WHATSAPP_NUMBER = "2348000000000";
+
+function contactBoutique() {
+  const message = "Hello, I visited the Maya Paul Boutique website concept and would like to make an enquiry.";
+  openWhatsApp(message);
+}
+
+function orderProduct(productName) {
+  const message = "Hello, I would like to enquire about " + productName + ". Please share the available sizes, colours and current price.";
+  openWhatsApp(message);
+}
+
+function openWhatsApp(message) {
+  if (WHATSAPP_NUMBER === "2348000000000") {
+    alert("This is a website demo. Add the boutique's real WhatsApp number in the code to activate enquiries.");
+    return;
+  }
+  const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
